@@ -1,54 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Santokis Natural Ice Cream</title>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
-    body {
-      font-family: 'Nunito', sans-serif;
-      background-color: #fdfdfd;
-      color: #2e3c2f;
-      line-height: 1.6;
-      font-size: 16px;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Nunito', sans-serif; background: #fff; color: #333; line-height: 1.6; }
 
-    header {
-      position: sticky; top: 0; background: #fff; z-index: 1000;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
-    .nav-container {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 12px 18px;
-    }
-    .nav-container img { height: 44px; max-width: 150px; }
-    .hamburger { font-size: 26px; cursor: pointer; color: #333; display: block; }
+    header { position: sticky; top: 0; background: #fff; z-index: 1000; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .nav-container { display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; }
+    .nav-container img { height: 44px; }
+    .hamburger { font-size: 26px; cursor: pointer; }
 
-    .side-menu {
-      position: fixed; top: 0; right: -100%; height: 100%; width: 80%;
-      background: #fff; transition: right 0.3s ease; z-index: 2000; padding-top: 70px;
-      box-shadow: -2px 0 12px rgba(0,0,0,0.15);
-    }
+    .side-menu { position: fixed; top: 0; right: -100%; width: 80%; height: 100%; background: #fff; transition: right 0.3s; padding-top: 70px; z-index: 2000; box-shadow: -2px 0 12px rgba(0,0,0,0.15); }
     .side-menu.active { right: 0; }
-    .side-menu ul { list-style: none; padding: 0; margin: 0; }
-    .side-menu li { border-bottom: 1px solid #eee; }
-    .side-menu a {
-      display: block; padding: 16px 20px; font-size: 1.1rem; font-weight: 600;
-      text-decoration: none; color: #333; transition: background 0.3s;
-    }
-    .side-menu a:hover { background: #f5f5f5; }
-
-    .overlay {
-      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.4); z-index: 1500;
-    }
+    .side-menu ul { list-style: none; }
+    .side-menu a { display: block; padding: 16px 20px; font-size: 1.1rem; font-weight: 600; text-decoration: none; color: #333; }
+    .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1500; }
     .overlay.active { display: block; }
 
-    /* Hero Section */
+    section { padding: 50px 20px; }
+    .section-title { text-align: center; font-size: 1.6rem; margin-bottom: 25px; font-weight: 700; }
+
+    /* Hero */
     .hero {
       text-align: center; padding: 0; position: relative;
       height: 85vh; overflow: hidden; display: flex; flex-direction: column;
@@ -66,90 +44,35 @@
     .hero h2 { font-size: clamp(1.8rem, 5vw, 2.5rem); margin-bottom: 12px; }
     .hero p { font-size: clamp(1rem, 3.5vw, 1.2rem); margin-bottom: 30px; }
 
-    .btn-group {
-      display: flex; flex-direction: column; gap: 12px; align-items: center;
-      width: 100%; max-width: 360px; margin: auto;
-    }
-    .btn {
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 14px 20px; border-radius: 12px; font-weight: bold;
-      width: 100%; font-size: 1rem; text-decoration: none; color: white;
-      transition: transform 0.3s ease;
-    }
+    .btn-group { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 360px; }
+    .btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 20px; border-radius: 12px; font-weight: bold; font-size: 1rem; text-decoration: none; color: white; transition: transform 0.3s; }
     .btn:hover { transform: scale(1.05); }
-    .btn.swiggy { background-color: #fc8019; }
-    .btn.zomato { background-color: #e23744; }
-    .btn.call { background-color: #2e3c2f; }
+    .btn.swiggy { background: #fc8019; } .btn.zomato { background: #e23744; } .btn.call { background: #2e3c2f; }
 
-    section { padding: 50px 20px; }
-    .section-title { text-align: center; font-size: 1.6rem; margin-bottom: 25px; font-weight: 700; color: #2e3c2f; }
+    /* Flavors */
+    .flavor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .flavor-card { background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); aspect-ratio: 1/1; display: flex; flex-direction: column; justify-content: center; text-align: center; }
+    .flavor-card video, .flavor-card img { width: 100%; height: 100%; object-fit: cover; }
+    .flavor-card h3 { background: rgba(0,0,0,0.6); color: #fff; font-size: 0.95rem; padding: 6px; margin-top: -40px; position: relative; }
 
-    .flavor-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
-    }
-    .flavor-card {
-      background: #fff; padding: 12px; border-radius: 14px; text-align: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: transform 0.3s;
-    }
-    .flavor-card:hover { transform: translateY(-5px); }
-    .flavor-card img, .flavor-card video {
-      width: 100%; border-radius: 10px; object-fit: cover; max-width: 100%;
-    }
-    .flavor-card h3 { margin-top: 10px; font-size: 0.95rem; font-weight: 600; }
+    /* Shrikhand */
+    .shrikhand-slider { position: relative; max-width: 400px; margin: auto; overflow: hidden; border-radius: 16px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+    .shrikhand-slider img { width: 100%; display: none; animation: fade 1s ease-in-out; }
+    .shrikhand-slider img.active { display: block; }
+    @keyframes fade { from { opacity: 0.3; } to { opacity: 1; } }
 
-    /* Shrikhand Slider */
-    .shrikhand-slider {
-      position: relative;
-      max-width: 400px;
-      margin: auto;
-      overflow: hidden;
-      border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    }
-    .shrikhand-slider img {
-      width: 100%;
-      display: none;
-      animation: fade 1s ease-in-out;
-    }
-    .shrikhand-slider img.active {
-      display: block;
-    }
-    @keyframes fade {
-      from { opacity: 0.3; }
-      to { opacity: 1; }
-    }
-
-    .locations iframe {
-      width: 100%; height: 280px; border: 0; border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-    }
-    footer {
-      background-color: #2e3c2f; color: white; text-align: center; padding: 25px 15px;
-    }
+    footer { background: #2e3c2f; color: white; text-align: center; padding: 25px 15px; }
     footer img { height: 36px; margin: 0 6px; }
-    footer a { color: white; font-weight: 600; text-decoration: underline; }
+    footer a { color: white; text-decoration: underline; }
 
-    /* Media Queries */
-    @media (min-width: 768px) {
-      .btn-group { flex-direction: row; flex-wrap: wrap; gap: 14px; }
-      .flavor-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
-      .hero { height: 90vh; }
-      .hero h2 { font-size: 2.4rem; }
-      .hero p { font-size: 1.2rem; }
-    }
-
-    @media (min-width: 1024px) {
-      .nav-container img { height: 56px; }
-      .flavor-card h3 { font-size: 1.1rem; }
-      .shrikhand-slider { max-width: 500px; }
-    }
+    @media (min-width:768px){ .btn-group{flex-direction:row;} .flavor-grid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));} }
   </style>
 </head>
 <body>
 
 <header>
   <div class="nav-container">
-    <img src="logo2.png" alt="Santokis Logo" loading="lazy">
+    <img src="logo2.png" alt="Logo">
     <div class="hamburger" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
   </div>
   <div class="overlay" id="overlay" onclick="closeMenu()"></div>
@@ -157,6 +80,7 @@
     <ul>
       <li><a href="#hero" onclick="closeMenu()">Home</a></li>
       <li><a href="#flavors" onclick="closeMenu()">Flavors</a></li>
+      <li><a href="#best-sellers" onclick="closeMenu()">Best Sellers</a></li>
       <li><a href="#shrikhand" onclick="closeMenu()">Shrikhand</a></li>
       <li><a href="#about" onclick="closeMenu()">Our Story</a></li>
       <li><a href="#locations" onclick="closeMenu()">Locations</a></li>
@@ -167,86 +91,78 @@
 
 <!-- HERO -->
 <section class="hero" id="hero">
-  <video autoplay muted loop playsinline>
-    <source src="hero-mobile.mp4" type="video/mp4">
-  </video>
+  <video autoplay muted loop playsinline><source src="hero-mobile.mp4"></video>
   <h2>Pure. Natural. Delicious.</h2>
   <p>Handcrafted ice cream made with love & nature’s finest ingredients.</p>
   <div class="btn-group">
-    <a href="#" class="btn swiggy"><i class="fa-brands fa-swiggy"></i> Order on Swiggy</a>
-    <a href="#flavors" class="btn"><i class="fa-solid fa-ice-cream"></i> Explore Flavors</a>
-    <a href="#" class="btn zomato"><i class="fa-brands fa-zomato"></i> Order on Zomato</a>
-    <a href="tel:+919999999999" class="btn call"><i class="fa-solid fa-phone"></i> Call & Pickup</a>
+    <a href="#" class="btn swiggy">Order on Swiggy</a>
+    <a href="#flavors" class="btn">Explore Flavors</a>
+    <a href="#" class="btn zomato">Order on Zomato</a>
+    <a href="tel:+919999999999" class="btn call">Call & Pickup</a>
   </div>
 </section>
 
-<!-- FLAVORS -->
-<section id="flavors" class="flavors">
+<!-- POPULAR FLAVORS -->
+<section id="flavors">
   <h2 class="section-title">Popular Flavors</h2>
   <div class="flavor-grid">
     <div class="flavor-card"><video autoplay muted loop playsinline><source src="mango.mp4"></video><h3>Fresh Mango</h3></div>
     <div class="flavor-card"><video autoplay muted loop playsinline><source src="suun.mp4"></video><h3>Sunday Special</h3></div>
-    <div class="flavor-card"><video autoplay muted loop playsinline><source src="ra.mp4"></video><h3>Roasted Almond</h3></div>
+  </div>
+</section>
+
+<!-- BEST SELLERS -->
+<section id="best-sellers">
+  <h2 class="section-title">Best Sellers</h2>
+  <div class="flavor-grid">
+    <div class="flavor-card"><video autoplay muted loop playsinline><source src="roasted-almond.mp4"></video><h3>Roasted Almond</h3></div>
     <div class="flavor-card"><video autoplay muted loop playsinline><source src="rose-pista.mp4"></video><h3>Rose Pista</h3></div>
     <div class="flavor-card"><video autoplay muted loop playsinline><source src="sitafal.mp4"></video><h3>Sitafal (Custard Apple)</h3></div>
+      <div class="flavor-card"><video autoplay muted loop playsinline><source src="ps.mp4"></video><h3>Pina-Strawberry</h3></div>
   </div>
 </section>
 
 <!-- SHRIKHAND -->
-<section id="shrikhand" class="shrikhand">
+<section id="shrikhand">
   <h2 class="section-title">Our Shrikhand</h2>
   <div class="shrikhand-slider">
-    <img src="s1.jpg" alt="Shrikhand 1" loading="lazy">
-    <img src="s2.jpg" alt="Shrikhand 2" loading="lazy">
-    <img src="s3.jpg" alt="Shrikhand 3" loading="lazy">
+    <img src="s1.jpg" alt="Shrikhand 1">
+    <img src="s2.jpg" alt="Shrikhand 2">
+    <img src="s3.jpg" alt="Shrikhand 3">
   </div>
 </section>
 
 <!-- ABOUT -->
-<section id="about" class="about">
+<section id="about">
   <h2 class="section-title">Our Story</h2>
   <p>At Santokis, we believe in keeping it natural. Our ice creams are made with real fruits and a whole lot of love. No preservatives, just purity.</p>
 </section>
 
 <!-- LOCATIONS -->
-<section id="locations" class="locations">
+<section id="locations">
   <h2 class="section-title">Find Us in Gujarat</h2>
-  <p style="text-align:center; margin-bottom:20px;">Visit our main branch at Navsari and enjoy a scoop of nature.</p>
-  <iframe src="https://maps.app.goo.gl/rnw11rxGP6TG83" allowfullscreen loading="lazy"></iframe>
+  <p style="text-align:center; margin-bottom:20px;">Our store location .</p>
+  <iframe src="https://www.google.com/maps?q=20.946701,72.924301&z=15&output=embed" allowfullscreen loading="lazy"></iframe>
+
 </section>
 
 <!-- FOOTER -->
 <footer id="contact">
-  <a href="#"><img src="sw.png" alt="Swiggy" loading="lazy"></a>
-  <a href="#"><img src="zo.png" alt="Zomato" loading="lazy"></a>
+  <a href="#"><img src="sw.png" alt="Swiggy"></a>
+  <a href="#"><img src="zo.png" alt="Zomato"></a>
   <p>© 2025 Santokis Natural Ice Cream | <a href="#">Instagram</a> | <a href="#">Facebook</a></p>
 </footer>
 
 <script>
   const sideMenu = document.getElementById('sideMenu');
   const overlay = document.getElementById('overlay');
-  function toggleMenu() {
-    sideMenu.classList.toggle('active');
-    overlay.classList.toggle('active');
-  }
-  function closeMenu() {
-    sideMenu.classList.remove('active');
-    overlay.classList.remove('active');
-  }
+  function toggleMenu(){ sideMenu.classList.toggle('active'); overlay.classList.toggle('active'); }
+  function closeMenu(){ sideMenu.classList.remove('active'); overlay.classList.remove('active'); }
 
   // Shrikhand fade slider
-  let slideIndex = 0;
-  const slides = document.querySelectorAll('.shrikhand-slider img');
-
-  function showSlides() {
-    slides.forEach((slide, i) => {
-      slide.classList.remove('active');
-      if (i === slideIndex) slide.classList.add('active');
-    });
-    slideIndex = (slideIndex + 1) % slides.length;
-  }
-  setInterval(showSlides, 3000);
-  showSlides();
+  let slideIndex=0; const slides=document.querySelectorAll('.shrikhand-slider img');
+  function showSlides(){ slides.forEach((s,i)=>{s.classList.remove('active'); if(i===slideIndex)s.classList.add('active');}); slideIndex=(slideIndex+1)%slides.length; }
+  setInterval(showSlides,3000); showSlides();
 </script>
 
 </body>
