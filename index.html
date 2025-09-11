@@ -97,21 +97,27 @@
     }
     .flavor-card h3 { margin-top: 10px; font-size: 0.95rem; font-weight: 600; }
 
-    /* Shrikhand Carousel */
-    .carousel-container { position: relative; width: 100%; max-width: 400px; margin: auto; perspective: 1000px; height: 250px; }
-    .carousel {
-      width: 100%; height: 100%; position: absolute; transform-style: preserve-3d;
-      animation: rotate 14s linear infinite;
+    /* Shrikhand Slider */
+    .shrikhand-slider {
+      position: relative;
+      max-width: 400px;
+      margin: auto;
+      overflow: hidden;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     }
-    .carousel img {
-      position: absolute; width: 160px; height: 160px; object-fit: cover;
-      border-radius: 16px; box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-      left: 50%; top: 50%; transform: translate(-50%, -50%);
+    .shrikhand-slider img {
+      width: 100%;
+      display: none;
+      animation: fade 1s ease-in-out;
     }
-    .carousel img:nth-child(1) { transform: rotateY(0deg) translateZ(240px) rotateX(-8deg); }
-    .carousel img:nth-child(2) { transform: rotateY(120deg) translateZ(240px) rotateX(-8deg); }
-    .carousel img:nth-child(3) { transform: rotateY(240deg) translateZ(240px) rotateX(-8deg); }
-    @keyframes rotate { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
+    .shrikhand-slider img.active {
+      display: block;
+    }
+    @keyframes fade {
+      from { opacity: 0.3; }
+      to { opacity: 1; }
+    }
 
     .locations iframe {
       width: 100%; height: 280px; border: 0; border-radius: 12px;
@@ -135,8 +141,7 @@
     @media (min-width: 1024px) {
       .nav-container img { height: 56px; }
       .flavor-card h3 { font-size: 1.1rem; }
-      .carousel-container { height: 300px; }
-      .carousel img { width: 200px; height: 200px; }
+      .shrikhand-slider { max-width: 500px; }
     }
   </style>
 </head>
@@ -181,8 +186,8 @@
   <div class="flavor-grid">
     <div class="flavor-card"><video autoplay muted loop playsinline><source src="mango.mp4"></video><h3>Fresh Mango</h3></div>
     <div class="flavor-card"><video autoplay muted loop playsinline><source src="suun.mp4"></video><h3>Sunday Special</h3></div>
-    <div class="flavor-card"><img src="roasted-almond.mp4" alt="Roasted Almond" loading="lazy"><h3>Roasted Almond</h3></div>
-    <div class="flavor-card"><img src="rose-pista.mp4" alt="Rose Pista" loading="lazy"><h3>Rose Pista</h3></div>
+    <div class="flavor-card"><video autoplay muted loop playsinline><source src="ra.mp4"></video><h3>Roasted Almond</h3></div>
+    <div class="flavor-card"><video autoplay muted loop playsinline><source src="rose-pista.mp4"></video><h3>Rose Pista</h3></div>
     <div class="flavor-card"><video autoplay muted loop playsinline><source src="sitafal.mp4"></video><h3>Sitafal (Custard Apple)</h3></div>
   </div>
 </section>
@@ -190,12 +195,10 @@
 <!-- SHRIKHAND -->
 <section id="shrikhand" class="shrikhand">
   <h2 class="section-title">Our Shrikhand</h2>
-  <div class="carousel-container">
-    <div class="carousel">
-      <img src="s1.jpg" alt="Shrikhand 1" loading="lazy">
-      <img src="s2.jpg" alt="Shrikhand 2" loading="lazy">
-      <img src="s3.jpg" alt="Shrikhand 3" loading="lazy">
-    </div>
+  <div class="shrikhand-slider">
+    <img src="s1.jpg" alt="Shrikhand 1" loading="lazy">
+    <img src="s2.jpg" alt="Shrikhand 2" loading="lazy">
+    <img src="s3.jpg" alt="Shrikhand 3" loading="lazy">
   </div>
 </section>
 
@@ -230,6 +233,20 @@
     sideMenu.classList.remove('active');
     overlay.classList.remove('active');
   }
+
+  // Shrikhand fade slider
+  let slideIndex = 0;
+  const slides = document.querySelectorAll('.shrikhand-slider img');
+
+  function showSlides() {
+    slides.forEach((slide, i) => {
+      slide.classList.remove('active');
+      if (i === slideIndex) slide.classList.add('active');
+    });
+    slideIndex = (slideIndex + 1) % slides.length;
+  }
+  setInterval(showSlides, 3000);
+  showSlides();
 </script>
 
 </body>
